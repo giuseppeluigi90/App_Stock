@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row m-1 align-items-center">
+        <div class="col-6">
+            <h2 class="titu"> Inventario: </h2>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row text-center">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"> C. Inventario </th>
+                    <th scope="col"> Codigo Producto </th>
+                    <th scope="col"> Producto </th>
+                    <th scope="col"> Entradas </th>
+                    <th scope="col"> Salidas </th>
+                    <th scope="col"> Stock </th>
+                    <th scope="col"> Estado  </th>
+                </tr>
+            </thead>
+            
+            {% for inventario in inventarios %}
+                <tbody>
+                    <tr>
+                        <td> {{inventario.0}} </td>
+                        <td> {{inventario.1}} </td>
+                        <td> {{inventario.2}} </td>
+                        <td> {{inventario.3}} </td>
+                        <td> {{inventario.4}} </td>
+                        <td> {{inventario.5}} </td>
+                        <td> {{inventario.6}} </td>
+                        <td> <a href="#" class="btn btn-outline-primary btn-sm"> Detalle </a> </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="message alert-success"> 
+                                        <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                                    </div>
+                                {% endfor%}
+                            {% endif %}
+                        {% endwith %}  
+
+</div>
+{% endblock%}

@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row m-1 align-items-center">
+        <div class="col-6">
+            <h2 class="titu"> Movimientos: </h2>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row text-center">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"> Codigo Mov </th>
+                    <th scope="col"> Fecha </th>
+                    <th scope="col"> Codigo Pro </th>
+                    <th scope="col"> Producto </th>
+                    <th scope="col"> Movimiento </th>
+                    <th scope="col"> Cantidad </th>
+                    <th scope="col"> P. Compra </th>
+                    <th scope="col"> P. Venta </th>
+                    <th scope="col"> Total Compra  </th>
+                    <th scope="col"> Total Venta </th>
+                    <th scope="col"> Observacion </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            
+            {% for movimiento in movimientos %}
+                <tbody>
+                    <tr>
+                        <td> {{movimiento.0}} </td>
+                        <td> {{movimiento.1}} </td>
+                        <td> {{movimiento.2}} </td>
+                        <td> {{movimiento.3}} </td>
+                        <td> 
+                            {% if movimiento.4 == 1 %}
+                                <h6> ENTRADA </h6>
+                            {% else %}
+                                <h6> SALIDA </h6>
+                            {% endif %}
+                        </td>
+                        <td> {{movimiento.5}} </td>
+                        <td> {{movimiento.6}}.00 </td>
+                        <td> {{movimiento.7}}.00 </td>
+                        <td> {{movimiento.8}}.00 </td>
+                        <td> {{movimiento.9}}.00 </td>
+                        <td> {{movimiento.10}} </td>
+                        <td> <a href="#" class="btn btn-outline-primary btn-sm"> Editar </a> </td>
+                        <td> <a href="{{ url_for('borrarMovimiento', movimiento_codigo=movimiento.0)}}" class="btn btn-outline-danger btn-sm"> Borrar </a> </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="message alert-success"> 
+                                        <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                                    </div>
+                                {% endfor%}
+                            {% endif %}
+                        {% endwith %}  
+
+</div>
+{% endblock%}

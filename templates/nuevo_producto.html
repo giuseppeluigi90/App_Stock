@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div id="titulo" class="row col-9">
+        <h1> NUEVO PRODUCTO: </h1>
+        <h5> Ingrese aquí la información del producto: </h5>
+        <hr>
+        <form action="" method="POST" id="form-nuevoproducto">
+            <div class="row">
+                <div class="col-7">
+                    <div class="row"> 
+                        <div class="col-5">
+                            <div class="form-group"> 
+                                <label for="codigo"> Codigo: </label>
+                                <input class="form-control" type="text" name="codigo" id="codigo" value="{{ request.form.codigo_producto }}" style="text-transform: uppercase;">
+                            </div> 
+                        </div>
+                        <div class="col-7">
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-12">
+                            <div class="form-group"> 
+                                <label for="nombreproducto"> Nombre producto: </label>
+                                <input class="form-control" type="text" name="nombreproducto" id="nombreproducto" value="{{ request.form.nombreproducto }}" style="text-transform: uppercase;">
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="preciocompra"> Precio Compra: </label>
+                                <input class="form-control" type="text" name="preciocompra" id="preciocompra" value="{{ request.form.preciocompra }}" style="text-transform: uppercase;">
+                            </div>   
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="precioventa"> Precio Venta: </label>
+                                <input class="form-control" type="text" name="precioventa" id="precioventa" value="{{ request.form.precioventa }}" style="text-transform: uppercase;"> 
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="entradas"> Entradas: </label>
+                                <input class="form-control" type="text" name="entradas" id="entradas" value="{{ request.form.entradas }}" readonly="readonly" style="text-transform: uppercase;">
+                            </div>   
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="salidas"> Salidas: </label>
+                                <input class="form-control" type="text" name="salidas" id="salidas" value="{{ request.form.salidas }}" readonly="readonly" style="text-transform: uppercase;">
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="stockactual"> Stock Actual: </label>
+                                <input class="form-control" type="text" name="stockactual" id="stockactual" value="{{ request.form.stockactual }}" readonly="readonly" style="text-transform: uppercase;">
+                            </div>   
+                        </div>
+                        <div class="col-4">
+                    
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                        </div>
+                        <div class="col-3" style="margin-top: 15px; margin-left: 20px;">
+                            <button type="reset" class="btn btn-secondary"> Limpiar </button>
+                        </div>
+
+                        <div class="col-3" style="margin-top: 15px; margin-left: 20px;">
+                            <button type="submit" class="btn btn-primary"> Grabar </button>
+                        </div>
+                    </div>
+                </div>
+            </form> 
+                <div class="col-5"> 
+                    <img class="img-producto" src="https://via.placeholder.com/400x300.png/CCCCCC/000000?text=Img-Producto" alt="">
+                </div>
+            </div>
+        
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message alert-success"> 
+                            <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            {% endwith %}                 
+    </div>
+{% endblock%}

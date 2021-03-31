@@ -1,0 +1,188 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div id="titulo" class="row col-9" >
+        <h1> NUEVO MOVIMIENTO: </h1>
+        <h5> Ingrese aquí la información del movimiento: </h5>
+        <hr>
+        <form action="" method="POST" name="f">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row"> 
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="codigomovimiento"> Codigo Movimiento: </label>
+                                <input class="form-control" type="text" name="codigomovimiento" id="codigomovimiento" value="{{ request.form.codigomovimiento }}" style="text-transform: uppercase;">
+                            </div> 
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="fecha"> Fecha: </label>
+                                <input class="form-control" type="date" name="fecha" id="fecha" value="{{ request.form.fecha }}">
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="codigoproducto"> Codigo Producto: </label>
+                                <input class="form-control" type="text" name="codigoproducto" id="codigoproducto" value="{{ request.form.codigoproducto }}" style="text-transform: uppercase;">
+                            </div>  
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group"> 
+                                <label for="producto"> Producto: </label>
+                                <input class="form-control" type="text" name="producto" id="producto" style="text-transform: uppercase;">
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="movimiento"> Movimiento: </label>
+                                <select class="form-control"  name="movimiento" id="movimiento" value="{{ request.form.movimiento }}"> 
+                                    <option value="1"> Entrada </option>
+                                    <option value="2"> Salida </option>
+                                </select>
+                            </div>   
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group"> 
+                                <label for="cantidad"> Cantidad: </label>
+                                <input class="form-control" type="number" name="cantidad" id="cantidad" value="{{ request.form.cantidad }}" onchange="cal()" onkeyup="cal()"> 
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="precioventa"> Precio Venta: </label>
+                                <input class="form-control" type="number" name="precioventa" id="precioventa" value="{{ request.form.precioventa }}" onchange="cal()" onkeyup="cal()">
+                            </div>   
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="preciocompra"> Precio Compra: </label>
+                                <input class="form-control" type="number" name="preciocompra" id="preciocompra" value="{{ request.form.preciocompra }}" onchange="cal()" onkeyup="cal()">
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="totalventa"> Total Venta: </label>
+                                <input class="form-control" type="number" name="totalventa" id="totalventa" value="{{ request.form.totalventa }}" readonly="readonly">
+                            </div> 
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group"> 
+                                <label for="totalcompra"> Total Compra: </label>
+                                <input class="form-control" type="number" name="totalcompra" id="totalcompra" value="{{ request.form.totalcompra }}" readonly="readonly">
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-9">
+                            <div class="form-group"> 
+                                <label for="observacion"> Observacion: </label>
+                                <input class="form-control" type="text" name="observacion" id="observacion" value="{{ request.form.observacion }}" style="text-transform: uppercase;"> 
+                            </div>   
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                        </div>
+                        <div class="col-3" style="margin-top: 15px; margin-left: 20px;">
+                            <button type="reset" class="btn btn-secondary"> Limpiar </button>
+                        </div>
+
+                        <div class="col-3" style="margin-top: 15px; margin-left: 20px;">
+                            <button type="submit" class="btn btn-primary"> Grabar </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <input class="form-control" type="text" placeholder="Buscar producto por nombre" id="buscarproducto" name="buscarproducto" value="{{ request.form.buscarproducto }}">
+                    <select size="5" class="form-control" name="listaproductos" id="listaproductos" onchange="seleccionarproducto(this.id);">
+                        {% for producto in productos %}
+                            <option value="{{producto.0}}"> {{producto.1}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+            </div>
+        </form>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message alert-success"> 
+                            <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            {% endwith %}               
+
+                            
+    </div>
+
+    <script> 
+        /* Funcion JS para cargar la fecha actual en los INPUT TIME */
+        $(document).ready(function() {
+
+            var now = new Date();
+
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+            var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+            $("#fecha").val(today);
+        });
+
+        /* Funcion JS para limpiar los INPUT  */
+       
+        
+        /* Funcion de JS para pasar NOMBRE Y CODIGO de producto al INPUT */
+        function seleccionarproducto(id){
+            var codigoSele = document.getElementById(id);
+            var productoSele = document.getElementById(id);
+            var codigoActual = document.getElementById('codigoproducto');
+            var productoActual = document.getElementById('producto');
+            codigoActual.value = codigoSele.value;
+            productoActual.value = productoSele.textContent;
+        }
+     
+        /* Funcion de JS para activar/desactivar los INPUT de Precio Compra o Precio Venta, segun el movimiento seleccionado */
+        $(document).ready(function() {
+            $('#precioventa').prop("readonly", true);
+            $('#movimiento').change(function(e) {
+                if ($(this).val() === "1") {
+                    $('#precioventa').prop("readonly", true);
+                    $('#preciocompra').prop("readonly", false);
+                } else {
+                    $('#precioventa').prop("readonly", false);
+                    $('#preciocompra').prop("readonly", true);
+                }
+            })
+        });
+
+        /* Funcion de JS para calcular el monto total de compra o  venta */
+        function cal() {
+            
+                try {
+                    var a = parseInt(document.f.cantidad.value),
+                        b = parseInt(document.f.precioventa.value);
+                        c = parseInt(document.f.preciocompra.value);
+                        document.f.totalventa.value = a * b;
+                        document.f.totalcompra.value = a * c;
+                } 
+                catch (e) {
+                }
+            }
+    </script>
+{% endblock%}

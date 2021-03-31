@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row m-1 align-items-center">
+        <div class="col-6">
+            <h2 class="titu"> Productos: </h2>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row text-center">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"> Codigo </th>
+                    <th scope="col"> Producto </th>
+                    <th scope="col"> Precio Compra </th>
+                    <th scope="col"> Precio Venta </th>
+                    <th scope="col"> Stock </th>
+                    <th scope="col">  </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            
+            {% for producto in productos %}
+                <tbody>
+                    <tr>
+                        <td> {{producto.0}} </td>
+                        <td> {{producto.1}} </td>
+                        <td> {{producto.2}} </td>
+                        <td> {{producto.3}} </td>
+                        <td> {{producto.6}} </td>
+                        <td> <a href="#" class="btn btn-outline-primary btn-sm"> Editar </a> </td>
+                        <td> <a href="{{ url_for('borrarProducto', producto_codigo=producto.0) }}" class="btn btn-outline-danger btn-sm"> Borrar </a> </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="message alert-success"> 
+                                        <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                                    </div>
+                                {% endfor%}
+                            {% endif %}
+                        {% endwith %}  
+</div>
+{% endblock%}

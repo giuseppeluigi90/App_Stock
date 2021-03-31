@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" >
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    </head>
+
+    <body>
+        <div class="container">
+           <div class="row"> 
+
+                <div id="box-login">
+                    <div class="col-5"> 
+                        <h1> MODULO DE GESTION Y CONTROL DE STOCK </h1>
+                    </div>
+
+                    <div class="col-4"> 
+                        
+                        <form action="" method="POST" class="">
+                            <h3> Iniciar Sesion: </h3>
+                            <div class="form-group"> 
+                                <label for="usuario"> Usuario: </label>
+                                <input class="form-control" type="text" name="usuario" id="usuario" value="{{ request.form.usuario }}" placeholder="ingrese aquí su usuario">
+                            </div>
+                            <div class="form-group"> 
+                                <label for="contraseña"> Contraseña: </label>
+                                <input class="form-control" type="password" name="contraseña" id="contraseña" value="{{ request.form.contraseña }}" placeholder="ingrese aquí su contraseña">
+                            </div>    
+                            <button type="submit" class="btn btn-primary" > Entrar </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-3"> 
+                </div>
+                    
+            </div>
+
+            <footer id="footer">
+                <div class="row col-12">
+                    <h6> La información almacenada en el sistema es confidencial y de uso exclusivo de la empresa. </h6>
+                </div>  
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="message alert-success"> 
+                                        <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                                    </div>
+                                {% endfor%}
+                            {% endif %}
+                        {% endwith %}  
+            </footer>
+            
+        </div>
+        
+    </body>
+</html>

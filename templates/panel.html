@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+        {% block content %}
+            <div id="titulo" class="row col-9" style="margin-bottom: 15px;">
+                <h1> MODULO DE GESTION Y CONTROL DE STOCK </h1>
+                <h5> Usuario: <small style="color: darkblue; font-weight: bolder; "> {{ session.usuario }} </smaLl> </h5>
+            </div>
+            <div class="row box-menu">
+                <div class="col-12"> 
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> <a href="/nuevo_producto">  NUEVO PRODUCTO </a> </h2> </div>
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> <a href="/nuevo_movimiento"> NUEVA ENTRADA </a> </h2> </div>
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> <a href="/nuevo_movimiento"> NUEVA SALIDA </a> </h2> </div>
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> <a href="/ver_movimientos"> VER MOVIMIENTOS </a> </h2> </div>
+                </div>
+
+                <div class="col-12"> 
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> VER REPORTES </h2> </div>
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> KARDEX </h2> </div>
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> <a href="/ver_inventario"> INVENTARIO </a> </h2> </div>
+                    <div class="box-card bg-dark" style="margin-top: -95px;"> <h2> CONFIGURAR </h2> </div>
+                </div>
+            </div>
+
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="message alert-success"> 
+                                        <h6 style="text-align: center; font-weight: 300;padding: 5px;"> {{ message }} </h6>
+                                    </div>
+                                {% endfor%}
+                            {% endif %}
+                        {% endwith %}  
+        {% endblock %}
+          
